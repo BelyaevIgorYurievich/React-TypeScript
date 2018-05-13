@@ -16,17 +16,20 @@ export default class App extends React.Component {
     }
 
     handleChangeValue = (event: any) : void => {
-        this.setState({value: event.target.value});
+        const { value } = event.target;
+        
+        if ( isNaN(+value) ) return;
+        
+        this.setState({value});
     }
 
     handleChangeValues = () : void => {
         const { values, value } = this.state;
-
         const _value = {
             value: value,
             id: this.createId()
         }
-
+        
         this.setState({
             value: '',
             values: [...values, _value]

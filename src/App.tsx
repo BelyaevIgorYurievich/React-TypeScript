@@ -1,8 +1,13 @@
 import * as React from 'react';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { MuiThemeProvider, lightBaseTheme } from "material-ui/styles";
+import RaisedButton from 'material-ui/RaisedButton';
+import * as Material from 'material-ui';
 
 import { Header } from './header/index';
 import { Footer } from './footer/index';
 
+const lightMuiTheme = getMuiTheme(lightBaseTheme);
 
 export default class App extends React.Component {
 
@@ -18,9 +23,7 @@ export default class App extends React.Component {
     handleChangeValue = (event: any) : void => {
         const { value } = event.target;
         
-        if ( isNaN(+value) ) return;
-        
-        this.setState({value});
+        this.setState({ value });
     }
 
     handleChangeValues = () : void => {
@@ -52,10 +55,16 @@ export default class App extends React.Component {
 
         return (
             <div>
-                <div style={{display:'flex'}}>
-                    <Header value={ value } handleChangeValue={ this.handleChangeValue }/>
-                    <button onClick={this.handleChangeValues}>Сохранить значеие</button>
-                </div>
+                
+                <Header value={ value } handleChangeValue={ this.handleChangeValue }/>
+                <MuiThemeProvider muiTheme={lightMuiTheme}>
+                    <Material.FlatButton 
+                        onClick={this.handleChangeValues}
+                    >
+                        Сохранить значеие
+                    </Material.FlatButton>
+                </MuiThemeProvider>
+            
                 <Footer values={ values } handleDeleteValues={ this.handleDeleteValues }/>
             </div>
         )

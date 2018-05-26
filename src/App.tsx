@@ -6,6 +6,7 @@ import * as Material from 'material-ui';
 
 import { Header } from './header/index';
 import { Footer } from './footer/index';
+import './style.less';
 
 const lightMuiTheme = getMuiTheme(lightBaseTheme);
 
@@ -13,6 +14,7 @@ export default class App extends React.Component {
 
     state = {
         value: '',
+        description:'',
         values: []
     };
 
@@ -25,7 +27,7 @@ export default class App extends React.Component {
         
         this.setState({ value });
     }
-
+    //переминоать функцию
     handleChangeValues = () : void => {
         const { values, value } = this.state;
         const _value = {
@@ -33,12 +35,21 @@ export default class App extends React.Component {
             id: this.createId()
         }
         
+        if ( !value ) return;
+
         this.setState({
             value: '',
+            description: '',
             values: [...values, _value]
         });
     }
     
+    handleChangeDescription = (event: any) : void => {
+        const { value } = event.target;
+        
+        this.setState({ description: value });
+    }
+
     handleDeleteValues = (deleteId) => () : void => {
         const { values } = this.state;
 
@@ -51,20 +62,17 @@ export default class App extends React.Component {
 
     render() {
 
-        const { value, values } = this.state;
+        const { value, values, description } = this.state;
 
         return (
-            <div>
-                
-                <Header value={ value } handleChangeValue={ this.handleChangeValue }/>
-                <MuiThemeProvider muiTheme={lightMuiTheme}>
-                    <Material.FlatButton 
-                        onClick={this.handleChangeValues}
-                    >
-                        Сохранить значеие
-                    </Material.FlatButton>
-                </MuiThemeProvider>
-            
+            <div className='block-create-tasks'>    
+                <Header 
+                    value={ value } 
+                    description={description} 
+                    handleChangeDescription={this.handleChangeDescription}
+                    handleChangeValues={this.handleChangeValues} 
+                    handleChangeValue={ this.handleChangeValue }
+                />
                 <Footer values={ values } handleDeleteValues={ this.handleDeleteValues }/>
             </div>
         )

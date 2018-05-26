@@ -11,7 +11,10 @@ const lightMuiTheme = getMuiTheme(lightBaseTheme);
 
 interface IAppProps {
     value: string;
-    handleChangeValue: (event: {})=>void;
+    description: string;
+    handleChangeValue: (event: {}) => void;
+    handleChangeValues: (event: {}) => void; 
+    handleChangeDescription: (event: {}) => void;
 }
 
 export const Header = (props:IAppProps) => {
@@ -21,12 +24,23 @@ export const Header = (props:IAppProps) => {
             <Material.TextField
               value={ props.value }
               onChange={ props.handleChangeValue }
+              floatingLabelText='Название задания'
             />
-            <Material.TextField
-          multiLine={true}
-          rows={2}
-          rowsMax={4}
-        />
+            <div className='description'>
+                <Material.TextField
+                    multiLine={true}
+                    value={ props.description }
+                    rows={2}
+                    rowsMax={4}
+                    onChange={ props.handleChangeDescription }
+                    floatingLabelText='Описание'
+                />
+                <Material.FlatButton 
+                    onClick={props.handleChangeValues}
+                >
+                    Сохранить
+                </Material.FlatButton>
+            </div>
         </MuiThemeProvider>
     )
 } 

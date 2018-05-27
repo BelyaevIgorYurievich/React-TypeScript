@@ -47,8 +47,8 @@
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "material-ui": "^0.20.1",
-    "react": "16.0.0",
-    "react-dom": "16.0.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "style-loader": "^0.21.0",
     "typescript": "^2.5.3"
   }

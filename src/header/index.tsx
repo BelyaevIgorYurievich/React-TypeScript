@@ -14,7 +14,7 @@ interface IAppProps {
 const Header = (props:IAppProps) => {
 
     return (
-        <div>
+        <>
             <Material.TextField
               autoFocus
               value={ props.value }
@@ -36,7 +36,7 @@ const Header = (props:IAppProps) => {
                     Сохранить
                 </Material.FlatButton>
             </div>
-        </div>
+        </>
     )
 } 
 

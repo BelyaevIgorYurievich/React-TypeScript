@@ -18,7 +18,7 @@ const Footer = (props: FooterProps) => {
     if ( !props.tasks.length ) return null;
 
     return(
-        <div>
+        <>
             {
                 props.tasks.map(({ value, id }) => {
                     return(
@@ -33,7 +33,7 @@ const Footer = (props: FooterProps) => {
                     
                 })
             }
-        </div>
+        </>
     )
 } 
 

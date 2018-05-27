@@ -1,26 +1,20 @@
 import * as React from 'react';
 import * as Material from 'material-ui';
-import { MuiThemeProvider, lightBaseTheme } from 'material-ui/styles';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-//
-// TODO Выести в отдельный модуть! 
-// Неохоимо переиспользовать!
-//
-const lightMuiTheme = getMuiTheme(lightBaseTheme);
+import materialHOC from 'Helper/material-ui-hoc'
 
 interface IAppProps {
     value: string;
     description: string;
     handleChangeValue: (event: {}) => void;
-    handleChangeValues: (event: {}) => void; 
+    handleChangeTask: (event: {}) => void; 
     handleChangeDescription: (event: {}) => void;
 }
 
-export const Header = (props:IAppProps) => {
+const Header = (props:IAppProps) => {
 
     return (
-        <MuiThemeProvider muiTheme={lightMuiTheme}>
+        <div>
             <Material.TextField
               autoFocus
               value={ props.value }
@@ -37,11 +31,13 @@ export const Header = (props:IAppProps) => {
                     floatingLabelText='Описание'
                 />
                 <Material.FlatButton 
-                    onClick={props.handleChangeValues}
+                    onClick={props.handleChangeTask}
                 >
                     Сохранить
                 </Material.FlatButton>
             </div>
-        </MuiThemeProvider>
+        </div>
     )
 } 
+
+export default materialHOC(Header);

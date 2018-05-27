@@ -10,7 +10,7 @@ const paths = {
 
 const config = {
     context: paths.src,
-    
+
     entry: {
         app: './index'
     },
@@ -21,7 +21,11 @@ const config = {
     },
     
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx']
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        
+        alias: {
+            Helper: path.resolve(__dirname, 'src/helper')
+        }
     },
 
     devtool: 'inline-source-map',

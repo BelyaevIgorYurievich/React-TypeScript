@@ -1,7 +1,9 @@
 import * as React from 'react';
 
-import { Header } from './header/index';
-import { Footer } from './footer/index';
+import * as helper from 'Helper/index';
+
+import Header from './header/index';
+import Footer from './footer/index';
 import './style.less';
 
 export default class App extends React.Component {
@@ -9,24 +11,20 @@ export default class App extends React.Component {
     state = {
         value: '',
         description:'',
-        values: []
+        tasks: []
     };
-
-    createId = () : string => {
-        return Math.random().toString(36).substr(2, 9);
-    }
 
     handleChangeValue = (event: any) : void => {
         const { value } = event.target;
         
         this.setState({ value });
     }
-    //переминоать функцию
-    handleChangeValues = () : void => {
-        const { values, value } = this.state;
+
+    handleChangeTask = () : void => {
+        const { tasks, value } = this.state;
         const _value = {
             value: value,
-            id: this.createId()
+            id: helper.createId()
         }
         
         if ( !value ) return;
@@ -34,7 +32,7 @@ export default class App extends React.Component {
         this.setState({
             value: '',
             description: '',
-            values: [...values, _value]
+            tasks: [...tasks, _value]
         });
     }
     
@@ -44,19 +42,19 @@ export default class App extends React.Component {
         this.setState({ description: value });
     }
 
-    handleDeleteValues = (deleteId) => () : void => {
-        const { values } = this.state;
+    handleDeleteTask = (deleteId) => () : void => {
+        const { tasks } = this.state;
 
-        const _values = values.filter(({id}) => {
+        const _tasks = tasks.filter(({ id }) => {
             return deleteId !== id;
         })
 
-        this.setState({values: _values})
+        this.setState({ tasks: _tasks })
     }
 
     render() {
 
-        const { value, values, description } = this.state;
+        const { value, tasks, description } = this.state;
 
         return (
             <div className='block-create-tasks'>    
@@ -64,10 +62,10 @@ export default class App extends React.Component {
                     value={ value } 
                     description={description} 
                     handleChangeDescription={this.handleChangeDescription}
-                    handleChangeValues={this.handleChangeValues} 
+                    handleChangeTask={this.handleChangeTask} 
                     handleChangeValue={ this.handleChangeValue }
                 />
-                <Footer values={ values } handleDeleteValues={ this.handleDeleteValues }/>
+                <Footer tasks={ tasks } handleDeleteTask={ this.handleDeleteTask }/>
             </div>
         )
     }

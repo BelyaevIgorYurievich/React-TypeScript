@@ -1,14 +1,8 @@
 import * as React from 'react';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { MuiThemeProvider, lightBaseTheme } from "material-ui/styles";
-import RaisedButton from 'material-ui/RaisedButton';
-import * as Material from 'material-ui';
 
 import { Header } from './header/index';
 import { Footer } from './footer/index';
 import './style.less';
-
-const lightMuiTheme = getMuiTheme(lightBaseTheme);
 
 export default class App extends React.Component {
 

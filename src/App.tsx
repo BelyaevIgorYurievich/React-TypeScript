@@ -21,9 +21,15 @@ export default class App extends React.Component {
     }
 
     handleChangeTask = () : void => {
-        const { tasks, value } = this.state;
+        const { 
+            tasks, 
+            value, 
+            description 
+        } = this.state;
+        
         const _value = {
-            value: value,
+            value,
+            description,
             id: helper.createId()
         }
         

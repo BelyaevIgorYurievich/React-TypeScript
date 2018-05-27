@@ -1,0 +1,20 @@
+.task {
+    display: flex;
+    font-family: Roboto, sans-serif;
+    align-items: center;
+
+    .text-block {
+        padding: 0 15px;
+    }
+
+    &-name {
+        font-size: 18px;
+    }
+
+    &-description {
+        font-size: 16px;
+        &.missing {
+            color: #00000061;
+        }
+    }
+}

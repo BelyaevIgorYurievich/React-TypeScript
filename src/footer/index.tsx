@@ -1,12 +1,15 @@
 import * as React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import materialHOC from 'Helper/material-ui-hoc'
+import materialHOC from 'Helper/material-ui-hoc';
+
+import './style.less';
 
 type FooterValue = {
     id: string;
     value: string;
-  };
+    description?: string;
+};
 
 interface FooterProps {
     tasks: FooterValue[];
@@ -20,10 +23,17 @@ const Footer = (props: FooterProps) => {
     return(
         <>
             {
-                props.tasks.map(({ value, id }) => {
+                props.tasks.map(({ value, id, description }) => {
                     return(
-                        <div key={id} style={{display:'flex'}}>
-                            <div>{value}</div>
+                        <div key={id} className='task'>
+                            <div className='text-block'>
+                                <p className='task-name'>Название задачи: { value }</p>
+                                { description ?
+                                    <p className='task-description'>{ description }</p>
+                                    :
+                                    <p className='task-description missing'>Описание отсутствует</p>
+                                } 
+                            </div>
                             <RaisedButton 
                                 onClick={props.handleDeleteTask(id)}
                                 label="Удалить запись" 

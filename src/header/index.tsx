@@ -22,6 +22,7 @@ export const Header = (props:IAppProps) => {
     return (
         <MuiThemeProvider muiTheme={lightMuiTheme}>
             <Material.TextField
+              autoFocus
               value={ props.value }
               onChange={ props.handleChangeValue }
               floatingLabelText='Название задания'

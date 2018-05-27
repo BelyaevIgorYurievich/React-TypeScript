@@ -1,24 +1,18 @@
 import * as React from 'react';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { MuiThemeProvider, lightBaseTheme } from "material-ui/styles";
-import RaisedButton from 'material-ui/RaisedButton';
-import * as Material from 'material-ui';
 
-import { Header } from './header/index';
-import { Footer } from './footer/index';
+import * as helper from 'Helper/index';
 
-const lightMuiTheme = getMuiTheme(lightBaseTheme);
+import Header from './header/index';
+import Footer from './footer/index';
+import './style.less';
 
 export default class App extends React.Component {
 
     state = {
         value: '',
-        values: []
+        description:'',
+        tasks: []
     };
-
-    createId = () : string => {
-        return Math.random().toString(36).substr(2, 9);
-    }
 
     handleChangeValue = (event: any) : void => {
         const { value } = event.target;
@@ -26,46 +20,52 @@ export default class App extends React.Component {
         this.setState({ value });
     }
 
-    handleChangeValues = () : void => {
-        const { values, value } = this.state;
+    handleChangeTask = () : void => {
+        const { tasks, value } = this.state;
         const _value = {
             value: value,
-            id: this.createId()
+            id: helper.createId()
         }
         
+        if ( !value ) return;
+
         this.setState({
             value: '',
-            values: [...values, _value]
+            description: '',
+            tasks: [...tasks, _value]
         });
     }
     
-    handleDeleteValues = (deleteId) => () : void => {
-        const { values } = this.state;
+    handleChangeDescription = (event: any) : void => {
+        const { value } = event.target;
+        
+        this.setState({ description: value });
+    }
 
-        const _values = values.filter(({id}) => {
+    handleDeleteTask = (deleteId) => () : void => {
+        const { tasks } = this.state;
+
+        const _tasks = tasks.filter(({ id }) => {
             return deleteId !== id;
         })
 
-        this.setState({values: _values})
+        this.setState({ tasks: _tasks })
     }
 
     render() {
 
-        const { value, values } = this.state;
+        const { value, tasks, description } = this.state;
 
         return (
-            <div>
-                
-                <Header value={ value } handleChangeValue={ this.handleChangeValue }/>
-                <MuiThemeProvider muiTheme={lightMuiTheme}>
-                    <Material.FlatButton 
-                        onClick={this.handleChangeValues}
-                    >
-                        Сохранить значеие
-                    </Material.FlatButton>
-                </MuiThemeProvider>
-            
-                <Footer values={ values } handleDeleteValues={ this.handleDeleteValues }/>
+            <div className='block-create-tasks'>    
+                <Header 
+                    value={ value } 
+                    description={description} 
+                    handleChangeDescription={this.handleChangeDescription}
+                    handleChangeTask={this.handleChangeTask} 
+                    handleChangeValue={ this.handleChangeValue }
+                />
+                <Footer tasks={ tasks } handleDeleteTask={ this.handleDeleteTask }/>
             </div>
         )
     }

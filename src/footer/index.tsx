@@ -1,9 +1,7 @@
 import * as React from 'react';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { MuiThemeProvider, lightBaseTheme } from "material-ui/styles";
 import RaisedButton from 'material-ui/RaisedButton';
 
-const lightMuiTheme = getMuiTheme(lightBaseTheme);
+import materialHOC from 'Helper/material-ui-hoc'
 
 type FooterValue = {
     id: string;
@@ -11,28 +9,25 @@ type FooterValue = {
   };
 
 interface FooterProps {
-    values: FooterValue[];
-    handleDeleteValues: (id:string) => any;
+    tasks: FooterValue[];
+    handleDeleteTask: (id:string) => any;
 }
 
-export const Footer = (props: FooterProps) => {
-
-    if ( !props.values.length ) return null;
+const Footer = (props: FooterProps) => {
+    
+    if ( !props.tasks.length ) return null;
 
     return(
         <div>
             {
-                props.values.map(({value, id}) => {
+                props.tasks.map(({ value, id }) => {
                     return(
                         <div key={id} style={{display:'flex'}}>
                             <div>{value}</div>
-
-                            <MuiThemeProvider muiTheme={lightMuiTheme}>
-                                <RaisedButton 
-                                    onClick={props.handleDeleteValues(id)}
-                                    label="Удалить запись" 
-                                />
-                            </MuiThemeProvider>
+                            <RaisedButton 
+                                onClick={props.handleDeleteTask(id)}
+                                label="Удалить запись" 
+                            />
                         </div>
                     ) 
                     
@@ -41,3 +36,5 @@ export const Footer = (props: FooterProps) => {
         </div>
     )
 } 
+
+export default materialHOC(Footer);

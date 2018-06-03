@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as Material from 'material-ui';
 
-import materialHOC from 'Helper/material-ui-hoc'
+import materialHOC from '../helper/material-ui-hoc';
 
 interface IAppProps {
     value: string;

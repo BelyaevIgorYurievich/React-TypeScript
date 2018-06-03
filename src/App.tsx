@@ -1,6 +1,7 @@
 import * as React from 'react';
+import axios from 'axios';
 
-import * as helper from 'Helper/index';
+import * as helper from './helper/index';
 
 import Header from './header/index';
 import Footer from './footer/index';
@@ -13,6 +14,16 @@ export default class App extends React.Component {
         description:'',
         tasks: []
     };
+
+    componentDidMount() {
+        axios.get('http://localhost:9000/data')
+        .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
 
     handleChangeValue = (event: any) : void => {
         const { value } = event.target;

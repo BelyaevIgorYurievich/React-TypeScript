@@ -5,7 +5,8 @@
   "main": "index.tsx",
   "scripts": {
     "start": "better-npm-run dev",
-    "build": "better-npm-run build"
+    "build": "better-npm-run build",
+    "server": "cross-env NODE_PATH=./server node server"
   },
   "betterScripts": {
     "dev": {
@@ -37,19 +38,23 @@
     "webpack-bundle-analyzer": "^2.9.0"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "core-js": "^2.5.1",
+    "cross-env": "^5.1.6",
     "css-loader": "^0.28.11",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "material-ui": "^0.20.1",
+    "nconf": "^0.10.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "style-loader": "^0.21.0",
-    "typescript": "^2.5.3"
+    "typescript": "^2.5.3",
+    "winston": "^2.4.2"
   }
 }

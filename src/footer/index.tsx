@@ -1,7 +1,7 @@
 import * as React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import materialHOC from 'Helper/material-ui-hoc';
+import materialHOC from '../helper/material-ui-hoc';
 
 import './style.less';
 

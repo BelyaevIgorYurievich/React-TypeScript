@@ -16,13 +16,13 @@ export default class App extends React.Component {
     };
 
     componentDidMount() {
-        axios.get('http://localhost:9000/data')
+        axios.get('http://localhost:9000/tasks')
         .then(function (response) {
             console.log(response);
-          })
-          .catch(function (error) {
+        })
+        .catch(function (error) {
             console.log(error);
-          });
+        });
     }
 
     handleChangeValue = (event: any) : void => {
@@ -51,6 +51,15 @@ export default class App extends React.Component {
             description: '',
             tasks: [...tasks, _value]
         });
+
+        axios.put('http://localhost:9000/tasks', _value)
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
     }
     
     handleChangeDescription = (event: any) : void => {

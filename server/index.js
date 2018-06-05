@@ -1,26 +1,20 @@
-const express = require('express');
-const app = express();
+var express = require('express');
 var config = require('config');
 var http = require('http');
 var log = require('libs/log')(module);
+var cors = require('cors');
+var router = require('./router');
+
+var app = express();
 
 http.createServer(app).listen(config.get('port'), function() {
     log.info('Express server listening on port ' + config.get('port'));
 });
 
-app.use((request, response, next) => {
-    request.chance = Math.random()
-    next();
-});
+app.use(cors());
 
-app.get('/data', (request, response) => {
-    response.header('Access-Control-Allow-Origin', '*');
-    response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    response.json({
-        chance: request.chance
-    });
-});
+app.use('/tasks', router.tasks)
 
 app.use(function(req, res) {
-    res.send(404, 'Страница не найдена');  
+    res.send(404, 'Not found');  
 });

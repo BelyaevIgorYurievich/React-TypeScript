@@ -1,3 +1,3 @@
-# React-TypeScript
+# React-TS
 
-Проект для изучеия TypeScript
+Проект для изучения TS
